@@ -14,6 +14,7 @@ struct MainView: View {
     
    
     @State private var numberError1 = false
+    @State private var numberError0 = false
     @State private var numberError2 = false
     @State private var eventError = false
     
@@ -69,30 +70,54 @@ struct MainView: View {
                     
                     Button("ADD", action:{
                         
-                        if date.eventname.isEmpty && (Int(date.nrpers) ?? 0 < 3)
+                        if date.eventname.isEmpty && date.nrpers.isEmpty
                         {   self.eventError = true
-                            self.numberError1 = true }
+                            self.numberError0 = true
+                            self.numberError1 = false
+                            self.numberError2 = false
+                        }
+                        else if date.nrpers.isEmpty
+                        {   self.eventError = false
+                            self.numberError0 = true
+                            self.numberError1 = false
+                            self.numberError2 = false
+                        }
+                        
+                         else if date.eventname.isEmpty && (Int(date.nrpers) ?? 0 < 3)
+                        {   self.eventError = true
+                            self.numberError1 = true
+                            self.numberError2 = false
+                            self.numberError0 = false
+                        }
                         
                         else if date.eventname.isEmpty && (Int(date.nrpers) ?? 0 > 30)
                         {   self.eventError = true
-                            self.numberError2 = true }
-                        
+                            self.numberError2 = true
+                            self.numberError1 = false
+                            self.numberError0 = false
+                        }
                         
                        else if (Int(date.nrpers) ?? 0 < 3 )
                                       
                               {self.numberError1 = true
+                        self.numberError2 = false
                             self.eventError = false
+                        self.numberError0 = false
                                                     
                               }
                         else if date.eventname.isEmpty
                         { self.eventError = true
                             self.numberError1 = false
+                            self.numberError2 = false
+                            self.numberError0 = false
                         }
                         
                         else if (Int(date.nrpers) ?? 0 > 30)
                         
                         {self.numberError2 = true
+                            self.numberError1 = false
                       self.eventError = false
+                            self.numberError0 = false
                                               
                         }
         
@@ -100,6 +125,8 @@ struct MainView: View {
                                 viewRouter.currentPage = .page2
                                 self.eventError = false
                                 self.numberError1 = false
+                                self.numberError0 = false
+                                self.numberError2 = false
                                              }
                     }
                       
@@ -111,6 +138,10 @@ struct MainView: View {
                 
                 if eventError {
                                 Text("Insert Event name").foregroundColor(Color.red)
+                            }
+                
+                if numberError0 {
+                                Text("Insert Number of persons").foregroundColor(Color.red)
                             }
                 if numberError2
                 {

@@ -14,7 +14,6 @@ struct SecondView: View {
     @EnvironmentObject var viewRouter: ViewRouter
     @EnvironmentObject var date: DateIntrare
    
-    
     var body: some View {
         
        

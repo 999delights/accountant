@@ -12,7 +12,7 @@ struct ThirdView: View {
     
     @EnvironmentObject var viewRouter: ViewRouter
     @EnvironmentObject var date: DateIntrare
-   
+
     
     var body: some View {
         ZStack{
@@ -26,6 +26,9 @@ struct ThirdView: View {
                 
             
             }
+            
+            
+            }
         }
         
         
@@ -34,7 +37,7 @@ struct ThirdView: View {
     }
     
     
-}
+
 
     
 
@@ -48,7 +51,7 @@ struct ThirdView_Previews: PreviewProvider {
            
             ThirdView().environmentObject(ViewRouter())
                     .environmentObject(DateIntrare())
-        
+                
         }
     }
 }

@@ -25,10 +25,13 @@ class DateIntrare: ObservableObject {
 }
 
 
+let vectorPers = [Person]()
+
 struct Person
 {
-     var id: Int
+     var id: UUID
     var nume: String
+    
   
 }
 
