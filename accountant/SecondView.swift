@@ -13,7 +13,8 @@ struct SecondView: View {
     
     @EnvironmentObject var viewRouter: ViewRouter
     @EnvironmentObject var date: DateIntrare
-   
+    @State var eroareNume = false
+    
     var body: some View {
         
        
@@ -48,24 +49,34 @@ struct SecondView: View {
                 
                
             }
-                
-                
-                
+//dictionar ??
+//                ForEach(0..<(Int(date.nrpers) ?? 0)) { index in
+//
+//                }
+//
+//
                 Spacer()
                 
                 ScrollView(.vertical, showsIndicators: false) {
                 ForEach(0..<(Int(date.nrpers) ?? 0)) { index in
-                TextField("Person Name", text: .constant(""))
+                    TextField("Person Name",
+                              text: $date.persons[index+1])
                     .padding()
                     .keyboardType(.default)
                     .autocapitalization(.none)
                     .disableAutocorrection(true)
                     .border(Color(UIColor.separator))
                     .foregroundColor(.gray)
+                    
                 }
                 }.padding(.top, 10)
                 
                 Spacer()
+                
+                if eroareNume {
+                                Text("Complete all the names").foregroundColor(Color.red)
+                            }
+                
                 HStack{
                     
                     
@@ -76,11 +87,25 @@ struct SecondView: View {
                     
                     Spacer()
                     Button("DONE", action:{
+                        var count: Int = 0
+                        for number in 0..<(Int(date.nrpers) ?? 0) {
+                            
+                            if(date.persons[number+1].isEmpty){
+                            
+                                count += 1
+                                
+                            }}
+                        if count > 0
+                        {self.eroareNume = true}
+                      
+                        if(count == 0  )
+                        {viewRouter.currentPage = .page3
+                            
+                        }
                         
-                            viewRouter.currentPage = .page3
                         
-                    } )
-                
+                    })
+                    
                
                     
                 }
@@ -96,7 +121,7 @@ struct SecondView: View {
         .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .leading)
            
            .edgesIgnoringSafeArea(.all)
-        
+            .modifier(DismissingKeyboard())
         
         }
     }

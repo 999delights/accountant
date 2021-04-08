@@ -9,7 +9,7 @@ import Foundation
 import SwiftUI
 
 
-func sum (pays: [Double], debtors: Int, missed: Int ) -> Double
+func sum (pays: inout [Double], debtors: Int, missed: Int ) -> Double
 { var total : Double = 0
     let count = 0...debtors+1
     for n in count
@@ -19,10 +19,25 @@ func sum (pays: [Double], debtors: Int, missed: Int ) -> Double
 }
 
 
-/*func computePayment(data: [[Double]], persCount: Int) -> Int
+func computePayment(date: inout [[Double]], persCount: Int)
 {
+    let size = 0...persCount + 1
+    var currMean: Double
+    for i in size {
+        currMean = date[size-1][i] / Double(persCount)
+        for k in size{
+                
+                    if i != k
+                    {
+                        date[k][i] = currMean
+                    }
+                
+            
+        }
+    }
+    
     
     
     
 }
-*/
+

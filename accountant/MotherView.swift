@@ -11,7 +11,7 @@ struct MotherView: View {
     
     @EnvironmentObject var viewRouter: ViewRouter
     let date = DateIntrare()
-  
+    
     var body: some View {
         switch viewRouter.currentPage{
         
